@@ -436,7 +436,8 @@ void DrawUtils::drawPNG(const uint32_t x, const uint32_t y, const uint8_t *data)
 bool DrawUtils::initFont() {
     void *font    = nullptr;
     uint32_t size = 0;
-    OSGetSharedData(OS_SHAREDDATATYPE_FONT_STANDARD, 0, &font, &size);
+    //! 中文菜单：使用系统中文共享字体，减少 WUPS 配置项缺字方框（缺省 STANDARD 对 CJK 覆盖不足）
+    OSGetSharedData(OS_SHAREDDATATYPE_FONT_CHINESE, 0, &font, &size);
 
     if (font && size) {
         pFont.xScale = 20;
